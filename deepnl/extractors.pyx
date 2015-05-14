@@ -256,7 +256,7 @@ cdef class Embeddings(Extractor):
                 self.table = embeddings.generate_vectors(len(self.dict), size)
         elif variant == 'word2vec':
             # load both vocab and vectors from single file
-            self.table, wordlist = embeddings.Word2Vect.read_vectors(vectors)
+            self.table, wordlist = embeddings.Gensim().read_vectors(vectors)
             self.dict = <dict>WD(None, wordlist=wordlist, variant=variant)
             # add vectors for special symbols
             extra = len(self.dict) - len(self.table)
