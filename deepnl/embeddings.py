@@ -128,14 +128,13 @@ class Gensim(object):
         Load the feature matrix used by gensim.
         """
         import gensim
-        model = gensim.models.Word2Vec.load(filename)
+        model = gensim.models.Word2Vec.load_word2vec_format(filename,binary=True)
         matrix = model.syn0
         vocab_size, num_features = matrix.shape
 
         vocab = model.vocab
         # sort to preserve order in matrix
-        sorted_words = [unicode(word, 'utf-8')
-                        for word in sorted(vocab, key=lambda x: vocab[x].index)]
+        sorted_words = [word for word in sorted(vocab, key=lambda x: vocab[x].index)]
         # vectors for the special symbols, not present in words, will be
         # created later
 
